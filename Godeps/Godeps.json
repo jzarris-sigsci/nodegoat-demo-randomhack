@@ -1,0 +1,40 @@
+{
+	"ImportPath": "github.com/imran",
+	"GoVersion": "go1.7",
+	"GodepVersion": "v79",
+	"Deps": [
+		{
+			"ImportPath": "github.com/kardianos/osext",
+			"Rev": "9d302b58e975387d0b4d9be876622c86cefe64be"
+		},
+		{
+			"ImportPath": "github.com/kardianos/service",
+			"Rev": "e173e96a4ea4c8241abf22e6f2644daa3c07f24e"
+		},
+		{
+			"ImportPath": "github.com/robfig/cron",
+			"Comment": "v1-53-gdf38d32",
+			"Rev": "df38d32658d8788cd446ba74db4bb5375c4b0cb3"
+		},
+		{
+			"ImportPath": "golang.org/x/sys/windows",
+			"Rev": "9ccfe848b9db8435a24c424abbc07a921adf1df5"
+		},
+		{
+			"ImportPath": "golang.org/x/sys/windows/registry",
+			"Rev": "9ccfe848b9db8435a24c424abbc07a921adf1df5"
+		},
+		{
+			"ImportPath": "golang.org/x/sys/windows/svc",
+			"Rev": "9ccfe848b9db8435a24c424abbc07a921adf1df5"
+		},
+		{
+			"ImportPath": "golang.org/x/sys/windows/svc/eventlog",
+			"Rev": "9ccfe848b9db8435a24c424abbc07a921adf1df5"
+		},
+		{
+			"ImportPath": "golang.org/x/sys/windows/svc/mgr",
+			"Rev": "9ccfe848b9db8435a24c424abbc07a921adf1df5"
+		}
+	]
+}
