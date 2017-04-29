@@ -96,7 +96,7 @@ func (p *program) Start(s service.Service) error {
 		headers: map[string]string{"Content-Type": "application/x-www-form-urlencoded"}}
 	bruteForce1 = Attack{name: "Brute Force 1", method: "GET", maxNap: 0, minNap: 0, pause: 1,
 		maxRequests: 1800, minRequests: 2, url: fmt.Sprintf("http://%s/login", target)}
-	bruteForce2 = Attack{name: "Brute Force 2", method: "GET", maxNap: 7000, minNap: 1, pause: 3,
+	bruteForce2 = Attack{name: "Brute Force 2", method: "GET", maxNap: 7000, minNap: 1, pause: 10,
 		url: fmt.Sprintf("http://%s/profile/", target)}
 	hotLink = Attack{name: "Hot Link", method: "HEAD", maxNap: 600, minNap: 1,
 		url:     fmt.Sprintf("http://%s/wp-content/precious.gif", target),
