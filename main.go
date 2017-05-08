@@ -231,7 +231,9 @@ func (attack *Attack) send() {
 			if err != nil {
 				Error.Println(fmt.Sprintf("The following error occurred while executing %s:%s", attack.name, err.Error()))
 			}
-			resp.Body.Close()
+			if resp != nil {
+				resp.Body.Close()
+			}
 			time.Sleep(time.Duration(attack.pause) * time.Second)
 		}
 	}
@@ -248,7 +250,9 @@ func (attack *Attack) force(request *http.Request) {
 		if err != nil {
 			Error.Println(fmt.Sprintf("The following error occurred while executing %s:%s", attack.name, err.Error()))
 		}
-		resp.Body.Close()
+		if resp != nil {
+			resp.Body.Close()
+		}
 		address.Reset()
 		time.Sleep(time.Duration(attack.pause) * time.Millisecond)
 
@@ -261,7 +265,9 @@ func (attack *Attack) link(maxReqs int, request *http.Request) {
 		if err != nil {
 			Error.Println(fmt.Sprintf("The following error occurred while executing %s:%s", attack.name, err.Error()))
 		}
-		resp.Body.Close()
+		if resp != nil {
+			resp.Body.Close()
+		}
 	}
 }
 
@@ -279,7 +285,9 @@ func (attack *Attack) redirect(request *http.Request) {
 			if err != nil {
 				Error.Println(fmt.Sprintf("The following error occurred while executing %s:%s", attack.name, err.Error()))
 			}
-			resp.Body.Close()
+			if resp != nil {
+				resp.Body.Close()
+			}
 			address.Reset()
 		}
 		i++
