@@ -1,7 +1,7 @@
 package main
 
 const (
-	target = "httpbin-demo.herokuapp.com"
+	target = "www.sigscidemo.com"
 )
 
 var (
