@@ -108,7 +108,7 @@ func (p *program) Start(s service.Service) error {
 	openRedirect = Attack{name: "Open Redirect", method: "GET", maxNap: 3000, minNap: 1,
 		maxRequests: 5, minRequests: 1, url: fmt.Sprintf("http://%s/redirects/ord-test.php?url=", target)}
 	searchApi = Attack{name: "Search API", method: "GET", maxNap: 7000, minNap: 1, maxRequests: 1200, pause: 1,
-		minRequests: 800, url: fmt.Sprintf("http://%s/"api/search, target)}
+		minRequests: 800, url: fmt.Sprintf("http://%s/api/search, target)}
 	sqlBlast = Attack{name: "SQL Blast", method: "GET", maxNap: 7000, minNap: 1, maxRequests: 1200, pause: 1,
 		minRequests: 800, url: fmt.Sprintf("http://%s/?user_id=%s", target, "1029292%20OR%2019%3D19%20--%20-")}
 
