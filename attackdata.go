@@ -1,7 +1,7 @@
 package main
 
 const (
-	target = "www.sigscidemo.com"
+	target = "sigsci-partnerdemo.herokuapp.com"
 )
 
 var (
