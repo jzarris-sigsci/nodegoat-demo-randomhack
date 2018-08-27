@@ -1,7 +1,6 @@
 package main
 
 var (
-	target = os.Getenv("SIGSCI_TARGET")
 	ips = []string{"217.160.180.106",
 		"178.33.236.178",
 		"173.254.28.22",
