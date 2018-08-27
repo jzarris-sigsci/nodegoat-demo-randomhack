@@ -1,5 +1,7 @@
 package main
 
+var target os.Getenv("SIGSCI_TARGET")
+
 import (
 	"bytes"
 	"fmt"
