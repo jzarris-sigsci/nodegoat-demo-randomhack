@@ -1,7 +1,7 @@
 package main
 
 const (
-	target = os.Getenv("TARGET")
+	target = os.Getenv("SIGSCI_TARGET")
 )
 
 var (
