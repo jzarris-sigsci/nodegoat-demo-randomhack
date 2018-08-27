@@ -1,7 +1,7 @@
 package main
 
 const (
-	target = "sigsci-partnerdemo.herokuapp.com"
+	target = os.Getenv("TARGET")
 )
 
 var (
