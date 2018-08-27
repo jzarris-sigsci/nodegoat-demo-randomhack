@@ -1,7 +1,9 @@
 package main
 
+var target_env = os.Getenv("SIGSCI_TARGET")
+
 const (
-	target = []os.Getenv("SIGSCI_TARGET")
+	target = target_env
 )
 
 var (
