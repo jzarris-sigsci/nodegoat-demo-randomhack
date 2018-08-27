@@ -1,7 +1,5 @@
 package main
 
-var target=os.Getenv("SIGSCI_TARGET")
-
 import (
 	"bytes"
 	"fmt"
@@ -339,6 +337,7 @@ func inspect(entries []*cron.Entry) {
 }
 
 func main() {
+	var target=os.Getenv("SIGSCI_TARGET")
 
 	/* Initialize Logging */
 	Init(os.Stdout, os.Stderr)
