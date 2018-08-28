@@ -1,5 +1,9 @@
 package main
 
+import (
+    "os"
+)
+
 var (
   	target = os.Getenv("SIGSCI_TARGET")
 	ips = []string{"217.160.180.106",
