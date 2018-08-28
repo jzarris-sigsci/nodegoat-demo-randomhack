@@ -127,29 +127,30 @@ func (p *program) run() {
 
 	/* Every 5th minute */
 	c.AddFunc("0 */5 * * * *", func() { auth.send() })
-	/* Every 10th minute */
-	c.AddFunc("0 */10 * * * *", func() { attackError.send() })
-	/* Every 15th minute */
-	c.AddFunc("0 */15 * * * *", func() { accountPmt.send() })
-	c.AddFunc("0 */15 * * * *", func() { attackTime.send() })
-	/* Every 25th minute */
-	c.AddFunc("0 */25 * * * *", func() { accountXfer.send() })
+	
+	/* REMOVE Every 10th minute */
+	
+	/* REMOVE Every 15th minute */
+	
+	/* REMOVE Every 25th minute */
+	
 	/* Every 30th minute */
-	c.AddFunc("0 */30 * * * *", func() { accountLink.send() })
-	c.AddFunc("0 */30 * * * *", func() { attackSize.send() })
 	c.AddFunc("0 */30 * * * *", func() { bruteForce1.send() })
+	
 	/* At minute 55 */
 	c.AddFunc("0 55 * * * *", func() { niktoNoVpn.execute() })
+	
 	/* Top of every hour */
-	c.AddFunc("0 0 */1 * * *", func() { openRedirect.send() })
+	
+	)
 	/* Every 2nd hour */
-	c.AddFunc("0 0 */2 * * *", func() { hotLink.send() })
-	c.AddFunc("0 0 */2 * * *", func() { hotLink2.send() })
+	
 	/* Every 3rd Hour */
 	c.AddFunc("0 0 */3 * * *", func() { sqlBlast.send() })
-	c.AddFunc("0 0 */3 * * *", func() { searchApi.send() })
+	
 	/* Every 4th hour */
 	c.AddFunc("0 0 */4 * * *", func() { bruteForce2.send() })
+	
 	/* At minute 18 past hour 1, 7, 13, and 19 */
 	c.AddFunc("0 18 1,7,13,19 * * *", func() {
 		niktoBlast.execute()
