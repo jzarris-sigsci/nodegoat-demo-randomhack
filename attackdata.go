@@ -1,9 +1,5 @@
 package main
 
-import (
-    "os"
-)
-
 const (
 	target = "sigsci-nodegoat-demo1.herokuapp.com"
 )
