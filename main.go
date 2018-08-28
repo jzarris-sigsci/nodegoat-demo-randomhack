@@ -93,7 +93,7 @@ func (p *program) Start(s service.Service) error {
 		pause: 2, maxRequests: 3, minRequests: 1,
 		url: fmt.Sprintf("http://%s/users/profile.php?user=", target, "user='%20or%201=1%20--")}
 	auth = Attack{name: "Auth", method: "POST", maxNap: 240, minNap: 0, pause: 2, maxRequests: 30,
-		minRequests: 2, url: fmt.Sprintf("http://%s/login?%s", target, "user=admin&password=taco"),
+		minRequests: 2, url: fmt.Sprintf("http://%s/login?%s", target, "userName=admin&password=taco"),
 		headers: map[string]string{"Content-Type": "application/x-www-form-urlencoded"}}
 	bruteForce1 = Attack{name: "Brute Force 1", method: "GET", maxNap: 0, minNap: 0, pause: 1,
 		maxRequests: 1800, minRequests: 2, url: fmt.Sprintf("http://%s/login", target)}
