@@ -142,7 +142,6 @@ func (p *program) run() {
 	
 	/* Top of every hour */
 	
-	)
 	/* Every 2nd hour */
 	
 	/* Every 3rd Hour */
