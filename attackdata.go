@@ -5,7 +5,7 @@ import (
 )
 
 const (
-	target = os.Getenv("SIGSCI_TARGET")
+	target = "sigsci-nodegoat-demo1.herokuapp.com"
 )
 
 var (
