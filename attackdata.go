@@ -1,7 +1,7 @@
 package main
 
 const (
-	target = "sigsci-nodegoat-demo1.herokuapp.com"
+	target = "www.sigscidemo.com"
 )
 
 var (
