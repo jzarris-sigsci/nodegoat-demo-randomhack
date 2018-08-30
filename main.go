@@ -129,7 +129,7 @@ func (p *program) run() {
 	c = cron.New()
 
 	/* Every 5th minute */
-	c.AddFunc("0 */5 * * * *", func() { auth.send() })
+
 	
 	/* REMOVE Every 10th minute */
 	c.AddFunc("0 */10 * * * *", func() { xssBlast.send() })
@@ -137,6 +137,7 @@ func (p *program) run() {
 	/* REMOVE Every 15th minute */
 	
 	/* REMOVE Every 25th minute */
+	c.AddFunc("0 */25 * * * *", func() { auth.send() })
 	
 	/* Every 30th minute */
 	c.AddFunc("0 */30 * * * *", func() { bruteForce1.send() })
