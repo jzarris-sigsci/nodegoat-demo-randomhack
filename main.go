@@ -132,7 +132,7 @@ func (p *program) run() {
 
 	
 	/* REMOVE Every 10th minute */
-	c.AddFunc("0 */10 * * * *", func() { xssBlast.send() })
+	
 	
 	/* REMOVE Every 15th minute */
 	
@@ -141,16 +141,19 @@ func (p *program) run() {
 	
 	/* Every 30th minute */
 	c.AddFunc("0 */30 * * * *", func() { bruteForce1.send() })
+
+	/* At minute 50 */
+	c.AddFunc("0 50 * * * *", func() { sqlBlast.send() })
 	
 	/* At minute 55 */
 	c.AddFunc("0 55 * * * *", func() { niktoNoVpn.execute() })
 	
 	/* Top of every hour */
+	c.AddFunc("0 0 */1 * * *", func() { xssBlast.send() })
 	
 	/* Every 2nd hour */
 	
 	/* Every 3rd Hour */
-	c.AddFunc("0 0 */3 * * *", func() { sqlBlast.send() })
 	
 	/* Every 4th hour */
 	c.AddFunc("0 0 */4 * * *", func() { bruteForce2.send() })
