@@ -54,6 +54,7 @@ var (
 	hotLink2     Attack
 	openRedirect Attack
 	sqlBlast     Attack
+	xssBlast     Attack
 	searchApi    Attack
 	niktoBlast   Tool
 	niktoNoVpn   Tool
