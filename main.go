@@ -311,8 +311,7 @@ func (tool *Tool) execute() {
 
 	Info.Println(fmt.Sprintf("Executing %s attack tool", tool.name))
 	if tool.name == "Nikto Blast" {
-		cmd := exec.Command(tool.location, "-h", tool.host, "-useragent",
-			"SigSci nktoblast (Demo/v1.0.1)", "-sourceip", randomIP())
+		cmd := exec.Command(tool.location, "-h", tool.host, "-sourceip", randomIP())
 		var out bytes.Buffer
 		cmd.Stdout = &out
 		err := cmd.Run()
@@ -326,7 +325,7 @@ func (tool *Tool) execute() {
 		nap := random(1, 2700)
 		time.Sleep(time.Duration(nap) * time.Second)
 		cmd := exec.Command(tool.location, "-h", tool.host, "-Pause", "1", "-T",
-			"x48", "-useragent", "SigSci (Demo/v1.0.1) nktonovpn", "-sourceip", randomIP())
+			"x48", "-sourceip", randomIP())
 		var out bytes.Buffer
 		cmd.Stdout = &out
 		err := cmd.Run()
