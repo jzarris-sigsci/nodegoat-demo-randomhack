@@ -235,6 +235,10 @@ func (attack *Attack) send() {
 		for r := 0; r < random(attack.minRequests, attack.maxRequests); r++ {
 			/* Get randomized user agent */
 			ret := random(0, 2)
+			
+			/* Get random ip from ip slice */
+			req.Header.Set("X-Source-Ip", randomIP())
+			
 			if ret == 1 {
 				ua = "SigSci Demo UA"
 			}
