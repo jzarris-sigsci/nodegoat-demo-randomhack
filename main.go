@@ -144,12 +144,12 @@ func (p *program) run() {
 	c = cron.New()
 
 	/* Every 1 minute */
+	c.AddFunc("0 */1 * * * *", func() { cve20175638.send() })
 	
 	/* Every 5th minute */
 
 	
 	/* Every 10th minute */
-	c.AddFunc("0 */10 * * * *", func() { cve20175638.send() })
 	c.AddFunc("0 */10 * * * *", func() { cve20177269.send() })
 	
 	/* REMOVE Every 15th minute */
