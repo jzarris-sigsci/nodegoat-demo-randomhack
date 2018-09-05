@@ -144,28 +144,28 @@ func (p *program) run() {
 	c = cron.New()
 
 	/* Every 1 minute */
-	c.AddFunc("0 */1 * * * *", func() { cve20175638.send() })
+	c.AddFunc("0 */1 * * * *", func() { cve20179805.send() })
 	
 	/* Every 5th minute */
 
 	
 	/* Every 10th minute */
-	c.AddFunc("0 */10 * * * *", func() { cve20177269.send() })
 	
 	/* REMOVE Every 15th minute */
 	
 	/* Every 25th minute */
 	c.AddFunc("0 */25 * * * *", func() { auth.send() })
-	c.AddFunc("0 */25 * * * *", func() { cve20175638.send() })
 	
 	/* Every 30th minute */
 	c.AddFunc("0 */30 * * * *", func() { bruteForce1.send() })
 
 	/* At minute 50 */
 	c.AddFunc("0 50 * * * *", func() { sqlBlast.send() })
+	c.AddFunc("0 50 * * * *", func() { cve20175638.send() })
 	
 	/* At minute 55 */
 	c.AddFunc("0 55 * * * *", func() { niktoNoVpn.execute() })
+	c.AddFunc("0 55 * * * *", func() { cve20177269.send() })
 	
 	/* Top of every hour */
 	c.AddFunc("0 0 */1 * * *", func() { xssBlast.send() })
