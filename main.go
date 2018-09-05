@@ -56,10 +56,10 @@ var (
 	sqlBlast     Attack
 	xssBlast     Attack
 	searchApi    Attack
-	CVE20175638  Attack
-	CVE20177269  Attack
-	CVE20179805  Attack
-	CVE201711776 Attack
+	cve20175638  Attack
+	cve20177269  Attack
+	cve20179805  Attack
+	cve201711776 Attack
 	impostor     Attack
 	niktoBlast   Tool
 	niktoNoVpn   Tool
