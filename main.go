@@ -226,7 +226,7 @@ func (attack *Attack) send() {
 	time.Sleep(time.Duration(nap) * time.Second)
 
 	/* Execute attack specific logic */
-	Info.Println(fmt.Sprintf("Executing %s attack: %s", attack.name))
+	Info.Println(fmt.Sprintf("Executing %s attack:", attack.name))
 	if attack.name == "Brute Force 2" {
 		attack.force(req)
 
@@ -238,7 +238,7 @@ func (attack *Attack) send() {
 	
 	} else if attack.name == "cve20175638" {
 		Info.Println(fmt.Sprintf("Executing %s attack: method,url,body %s %s %s", attack.name, attack.method, attack.url, attack.body))
-		attack.force(req)
+		attack.link(req)
 
 	} else if attack.name == "Open Redirect" {
 		attack.redirect(req)
