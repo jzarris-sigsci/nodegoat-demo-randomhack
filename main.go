@@ -292,6 +292,7 @@ func (attack *Attack) link(maxReqs int, request *http.Request) {
 		resp, err := http.DefaultClient.Do(request)
 		if err != nil {
 			Error.Println(fmt.Sprintf("The following error occurred while executing %s:%s", attack.name, err.Error()))
+			Error.Println(fmt.Sprintf("Request:%s", request))
 		}
 		if resp != nil {
 			resp.Body.Close()
