@@ -141,7 +141,7 @@ func (p *program) run() {
 	c = cron.New()
 
 	/* Every 1 minute */
-	c.AddFunc("0 */25 * * * *", func() { cve20177269.send() })
+	c.AddFunc("0 */1 * * * *", func() { cve20177269.send() })
 	
 	/* Every 5th minute */
 
