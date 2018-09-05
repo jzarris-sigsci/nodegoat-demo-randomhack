@@ -122,10 +122,7 @@ func (p *program) Start(s service.Service) error {
 	cve20175638 = Attack{name: "cve20175638", method: "GET", maxNap: 0, minNap: 0, pause: 1,
 		maxRequests: 1800, minRequests: 2, url: fmt.Sprintf("http://%s/", target)}
 	        headers: map[string]string{"Content-Type": "%{(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#_memberAccess?)multipart/form-data"}}
-	xxx = Attack{name: "xxx", method: "GET", maxNap: 600, minNap: 1,
-		url:     fmt.Sprintf("http://%s/", target),
-		headers: map[string]string{"Content-Type": "%{(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#_memberAccess?)multipart/form-data"}}
-
+	
 	/* Attack Tools */
 	niktoBlast = Tool{name: "Nikto Blast", location: "nikto/program/nikto.pl", host: target}
 	niktoNoVpn = Tool{name: "Nikto No VPN", location: "nikto/program/nikto.pl", host: target}
