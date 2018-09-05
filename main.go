@@ -213,6 +213,7 @@ func (attack *Attack) send() {
 	if attack.headers != nil {
 		for key, value := range attack.headers {
 			req.Header.Set(key, value)
+			Info.Println(fmt.Sprintf("Header Name:%s Header Value:%s", key, value))
 		}
 	}
 
@@ -225,7 +226,7 @@ func (attack *Attack) send() {
 	time.Sleep(time.Duration(nap) * time.Second)
 
 	/* Execute attack specific logic */
-	Info.Println(fmt.Sprintf("Executing %s attack", attack.name))
+	Info.Println(fmt.Sprintf("Executing %s attack: %s", attack.name))
 	if attack.name == "Brute Force 2" {
 		attack.force(req)
 
@@ -236,6 +237,7 @@ func (attack *Attack) send() {
 		attack.link(5, req)
 	
 	} else if attack.name == "cve20175638" {
+		Info.Println(fmt.Sprintf("Executing %s attack: method,url,body %s %s %s", attack.name, attack.method, attack.url, attack.body))
 		attack.force(req)
 
 	} else if attack.name == "Open Redirect" {
