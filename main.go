@@ -238,7 +238,7 @@ func (attack *Attack) send() {
 	
 	} else if attack.name == "cve20175638" {
 		Info.Println(fmt.Sprintf("Executing %s attack: method,url,body %s %s %s", attack.name, attack.method, attack.url, attack.body))
-		attack.link(req)
+		attack.link(5, req)
 
 	} else if attack.name == "Open Redirect" {
 		attack.redirect(req)
