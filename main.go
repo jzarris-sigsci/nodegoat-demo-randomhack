@@ -234,6 +234,9 @@ func (attack *Attack) send() {
 
 	} else if attack.name == "Hot Link 2" {
 		attack.link(5, req)
+	
+	} else if attack.name == "cve20175638" {
+		attack.link(5, req)
 
 	} else if attack.name == "Open Redirect" {
 		attack.redirect(req)
