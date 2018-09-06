@@ -6,8 +6,6 @@ import (
 	"github.com/kardianos/service"
 	"github.com/robfig/cron"
 	"io"
-	"ioutil"
-	"strings"
 	"log"
 	"math/rand"
 	"net/http"
