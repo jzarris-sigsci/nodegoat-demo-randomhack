@@ -7,6 +7,7 @@ import (
 	"github.com/robfig/cron"
 	"io"
 	"io/ioutil"
+	"strings"
 	"log"
 	"math/rand"
 	"net/http"
