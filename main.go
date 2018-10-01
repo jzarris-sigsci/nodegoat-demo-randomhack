@@ -146,7 +146,7 @@ func (p *program) run() {
 	c = cron.New()
 
 	/* Every 1 minute */
-	c.AddFunc("0  * * * *", func() { cve20179805.send() }) */
+	c.AddFunc("0  * * * *", func() { cve20179805.send() })
 	
 	/* Every 5th minute */
 
@@ -159,7 +159,7 @@ func (p *program) run() {
 	c.AddFunc("0 */25 * * * *", func() { auth.send() })
 	
 	/* Every 30th minute */
-	/* c.AddFunc("0 */30 * * * *", func() { bruteForce1.send() })
+	/* c.AddFunc("0 */30 * * * *", func() { bruteForce1.send() }) */
 
 	/* At minute 50 */
 	c.AddFunc("0 50 * * * *", func() { sqlBlast.send() })
