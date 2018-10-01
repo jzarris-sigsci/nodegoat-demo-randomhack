@@ -126,7 +126,7 @@ func (p *program) Start(s service.Service) error {
 		maxRequests: 50, minRequests: 10, url: fmt.Sprintf("http://%s/quotes/", target),
 		headers: map[string]string{"User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"}}
 	ratelimit = Attack{name: "RateLimit", method: "GET", maxNap: 0, minNap: 0,
-		maxRequests: 50, minRequests: 10, url: fmt.Sprintf("http://%s//stockhistory/", target),
+		maxRequests: 50, minRequests: 10, url: fmt.Sprintf("http://%s/stockhistory/", target),
 		headers: map[string]string{"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:10.0) Gecko/20100101 Firefox/10.0"}}
 	cve20175638 = Attack{name: "cve20175638", method: "GET", maxNap: 0, minNap: 0, pause: 1,
 		maxRequests: 1800, minRequests: 2, url: fmt.Sprintf("http://%s/", target),
