@@ -275,7 +275,7 @@ func (attack *Attack) send() {
 		
 	} else if attack.name == "Impostor" {
 		Info.Println(fmt.Sprintf("Executing %s attack: method,url,body %s %s %s", attack.name, attack.method, attack.url, attack.body))
-		attack.link(2, req)
+		attack.link(100, req)
 
 	} else {
 		/* Get random # of requests to send */
