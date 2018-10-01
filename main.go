@@ -379,7 +379,7 @@ func (attack *Attack) crawler(request *http.Request) {
 			parsedUrl, err := url.Parse(address.String())
 			request.URL = parsedUrl
 			resp, err := http.DefaultClient.Do(request)
-			Info.Println(fmt.Sprintf("Executing %s attack: url: %s", attack.name, request.URL))
+			//Info.Println(fmt.Sprintf("Executing %s attack: url: %s", attack.name, request.URL))
 			if err != nil {
 				Error.Println(fmt.Sprintf("The following error occurred while executing %s:%s", attack.name, err.Error()))
 			}
