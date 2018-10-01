@@ -371,7 +371,7 @@ func (attack *Attack) crawler(request *http.Request) {
 	Info.Println(fmt.Sprintf("Add Crawler Paths"))
 	var address bytes.Buffer
 	i := 1
-	modBy := random(attack.minRequests, attack.maxRequests)
+	//modBy := random(attack.minRequests, attack.maxRequests)
 	for _, element := range crawlerpaths {
 		//if i%modBy == 0 {
 			address.WriteString(attack.url)
