@@ -381,7 +381,7 @@ func (attack *Attack) crawler(request *http.Request) {
 			resp, err := http.DefaultClient.Do(request)
 			//Info.Println(fmt.Sprintf("Executing %s attack: url: %s", attack.name, request.URL))
 			if err != nil {
-				Error.Println(fmt.Sprintf("The following error occurred while executing %s:%s", attack.name, err.Error()))
+				//Error.Println(fmt.Sprintf("The following error occurred while executing %s:%s", attack.name, err.Error()))
 			}
 			if resp != nil {
 				resp.Body.Close()
