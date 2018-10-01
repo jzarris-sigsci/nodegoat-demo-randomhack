@@ -154,11 +154,11 @@ func (p *program) run() {
 	c = cron.New()
 
 	/* Every 1 minute */
-	c.AddFunc("0 * * * *", func() { impostor.send() })
-	c.AddFunc("0 * * * *", func() { ratelimit.send() })
+	//c.AddFunc("0 * * * *", func() { impostor.send() })
 	
 	/* Every 5th minute */
-
+	c.AddFunc("0 */5 * * *", func() { impostor.send() })
+	c.AddFunc("0 */5 * * *", func() { ratelimit.send() })
 	
 	/* Every 10th minute */
 	
