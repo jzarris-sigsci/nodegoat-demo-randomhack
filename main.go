@@ -373,7 +373,7 @@ func (attack *Attack) crawler(request *http.Request) {
 	i := 1
 	modBy := random(attack.minRequests, attack.maxRequests)
 	for _, element := range crawlerpaths {
-		if i%modBy == 0 {
+		//if i%modBy == 0 {
 			address.WriteString(attack.url)
 			address.WriteString(element)
 			parsedUrl, err := url.Parse(address.String())
@@ -387,7 +387,7 @@ func (attack *Attack) crawler(request *http.Request) {
 				resp.Body.Close()
 			}
 			address.Reset()
-		}
+		//}
 		i++
 		//time.Sleep(time.Duration(modBy) * time.Second)
 	}
