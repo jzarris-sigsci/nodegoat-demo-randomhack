@@ -359,6 +359,7 @@ func (attack *Attack) redirect(request *http.Request) {
 }
 
 func (attack *Attack) crawler(request *http.Request) {
+	Info.Println(fmt.Sprintf("Add Crawler Paths"))
 	var address bytes.Buffer
 	i := 1
 	modBy := random(attack.minRequests, attack.maxRequests)
