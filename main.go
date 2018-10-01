@@ -63,6 +63,7 @@ var (
 	cve20179805  Attack
 	cve201711776 Attack
 	impostor     Attack
+	ratelimit     Attack	
 	niktoBlast   Tool
 	niktoNoVpn   Tool
 
