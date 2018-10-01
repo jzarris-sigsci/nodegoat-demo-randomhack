@@ -381,7 +381,7 @@ func (attack *Attack) crawler(request *http.Request) {
 			address.Reset()
 		}
 		i++
-		time.Sleep(time.Duration(modBy) * time.Second)
+		//time.Sleep(time.Duration(modBy) * time.Second)
 	}
 }
 
