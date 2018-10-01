@@ -7,7 +7,7 @@ import (
 var (
   	target = os.Getenv("SIGSCI_TARGET")
 	
-	crawler = []string{"10001.php",
+	crawlerpaths = []string{"10001.php",
 		"10002.php",
 		"10003.php",
 		"10004.php",
