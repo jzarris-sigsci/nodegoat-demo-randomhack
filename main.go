@@ -298,10 +298,10 @@ func (attack *Attack) send() {
 		var ua = ""
 		for r := 0; r < random(attack.minRequests, attack.maxRequests); r++ {
 			/* Get randomized user agent */
-			ret := random(0, 2)
+			ret := random(0, 50)
 			
 			if ret == 1 {
-				ua = "SigSci Demo UA"
+				ua = "() { :; }; echo Nikto-Added-CVE-2014-6271: true;echo;echo;"
 			}
 			req.Header.Set("User-Agent", ua)
 			resp, err := http.DefaultClient.Do(req)
