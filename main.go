@@ -158,7 +158,7 @@ func (p *program) run() {
 	c = cron.New()
 
 	/* Every 1 minute */
-	c.AddFunc("0 * * * *", func() { probe.send() })
+	//c.AddFunc("0 * * * *", func() { probe.send() })
 	
 	/* Every 5th minute */
 	c.AddFunc("0 */5 * * *", func() { ratelimit.send() })
@@ -166,7 +166,8 @@ func (p *program) run() {
 	/* Every 10th minute */
 	c.AddFunc("0 */10 * * *", func() { impostor.send() })
 	
-	/* REMOVE Every 15th minute */
+	/* Every 15th minute */
+	c.AddFunc("0 */15 * * *", func() { probe.send() })
 	
 	/* Every 25th minute */
 	c.AddFunc("0 */25 * * * *", func() { auth.send() })
