@@ -130,7 +130,7 @@ func (p *program) Start(s service.Service) error {
 		maxRequests: 15, minRequests: 10, url: fmt.Sprintf("http://%s/stockhistory/", target),
 		headers: map[string]string{"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:10.0) Gecko/20100101 Firefox/10.0"}}
 	probe = Attack{name: "Probe", method: "GET", maxNap: 0, minNap: 0,
-		maxRequests: 15, minRequests: 10, url: fmt.Sprintf("http://%s/", target),
+		maxRequests: 25, minRequests: 15, url: fmt.Sprintf("http://%s/", target),
 		headers: map[string]string{"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:10.0) Gecko/20100101 Firefox/10.0"}}
 	cve20175638 = Attack{name: "cve20175638", method: "GET", maxNap: 0, minNap: 0, pause: 1,
 		maxRequests: 10, minRequests: 2, url: fmt.Sprintf("http://%s/", target),
