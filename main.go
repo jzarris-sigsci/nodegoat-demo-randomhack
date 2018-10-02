@@ -157,10 +157,10 @@ func (p *program) run() {
 	//c.AddFunc("0 * * * *", func() { impostor.send() })
 	
 	/* Every 5th minute */
-	c.AddFunc("0 */5 * * *", func() { impostor.send() })
 	c.AddFunc("0 */5 * * *", func() { ratelimit.send() })
 	
 	/* Every 10th minute */
+	c.AddFunc("0 */10 * * *", func() { impostor.send() })
 	
 	/* REMOVE Every 15th minute */
 	
@@ -187,7 +187,7 @@ func (p *program) run() {
 	/* Every 3rd Hour */
 	
 	/* Every 4th hour */
-	c.AddFunc("0 0 */4 * * *", func() { bruteForce2.send() })
+	//c.AddFunc("0 0 */4 * * *", func() { bruteForce2.send() })
 	
 	/* At minute 18 past hour 1, 7, 13, and 19 */
 	c.AddFunc("0 18 1,7,13,19 * * *", func() {
