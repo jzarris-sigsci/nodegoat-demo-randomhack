@@ -8,6 +8,10 @@ var (
   	target = os.Getenv("SIGSCI_TARGET")
 	probeurls = []string{"index.asp?page=..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd",
 		"shell.php",
+		"ampache/login.php",
+		"soapdocs/webapps/soap/WEB-INF/config/soapConfig.xml",
+		"Citrix/MetaFrameXP/default/login.asp",
+		"bin/admin.pl",
 		"cgi-bin/ncbook/ncbook.cgi",
 		".git/info/refs",
 		"scripts/nessus%22%3E%3Cscript%3Ealert%28%27django_admin_xss.nasl%27%29%3C/script%3E/",
