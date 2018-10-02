@@ -238,6 +238,11 @@ func randomIP() string {
 	return ips[rand.Intn(len(ips))]
 }
 
+func randomCrawlerIP() string {
+	rand.Seed(time.Now().UTC().UnixNano())
+	return crawlerips[rand.Intn(len(crawlerips))]
+}
+
 func RandomString(len int) string {
       bytes := make([]byte, len)
      for i := 0; i < len; i++ {
@@ -300,9 +305,11 @@ func (attack *Attack) send() {
 		
 	} else if attack.name == "Impostor" {
 		Info.Println(fmt.Sprintf("Executing %s attack: method,url,body %s %s %s", attack.name, attack.method, attack.url, attack.body))
+		req.Header.Set("X-Forwarded-For", randomCrawlerIP())
 		attack.crawler(req)
 	} else if attack.name == "RateLimit" {
 		Info.Println(fmt.Sprintf("Executing %s attack: method,url,body %s %s %s", attack.name, attack.method, attack.url, attack.body))
+		req.Header.Set("X-Forwarded-For", randomCrawlerIP())
 		attack.crawler(req)
 	} else if attack.name == "Probe" {
 		Info.Println(fmt.Sprintf("Executing %s attack: method,url,body %s %s %s", attack.name, attack.method, attack.url, attack.body))
