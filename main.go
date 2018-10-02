@@ -161,10 +161,10 @@ func (p *program) run() {
 	//c.AddFunc("0 * * * *", func() { probe.send() })
 	
 	/* Every 5th minute */
-	c.AddFunc("0 */5 * * *", func() { ratelimit.send() })
+	//c.AddFunc("0 */5 * * *", func() { ratelimit.send() })
 	
 	/* Every 10th minute */
-	c.AddFunc("0 */10 * * *", func() { impostor.send() })
+	//c.AddFunc("0 */10 * * *", func() { impostor.send() })
 	
 	/* Every 15th minute */
 	c.AddFunc("0 */15 * * *", func() { probe.send() })
@@ -173,11 +173,22 @@ func (p *program) run() {
 	c.AddFunc("0 */25 * * * *", func() { auth.send() })
 	c.AddFunc("0 */25 * * * *", func() { cve20179805.send() })
 	
+	/* Every 27th minute */
+	c.AddFunc("0 0 */27 * * *", func() { xssBlast.send() })
+	
 	/* Every 28th minute */
 	c.AddFunc("0 */28 * * * *", func() { auth.send() })
 	
 	/* Every 30th minute */
 	// c.AddFunc("0 */30 * * * *", func() { bruteForce1.send() })
+	c.AddFunc("0 */30 * * * ", func() { sqlBlast.send() })
+	c.AddFunc("0 */30 * * * ", func() { cve20175638.send() })
+	
+	/* Every 45th minute */
+	c.AddFunc("0 */45 * * *", func() { impostor.send() })
+	
+	/* Every 50th minute */
+	c.AddFunc("0 */50 * * *", func() { ratelimit.send() })
 
 	/* At minute 50 */
 	c.AddFunc("0 50 * * * *", func() { sqlBlast.send() })
