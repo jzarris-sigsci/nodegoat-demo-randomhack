@@ -63,7 +63,8 @@ var (
 	cve20179805  Attack
 	cve201711776 Attack
 	impostor     Attack
-	ratelimit     Attack	
+	ratelimit    Attack	
+	probe        Attack	
 	niktoBlast   Tool
 	niktoNoVpn   Tool
 
@@ -128,6 +129,9 @@ func (p *program) Start(s service.Service) error {
 	ratelimit = Attack{name: "RateLimit", method: "GET", maxNap: 0, minNap: 0,
 		maxRequests: 15, minRequests: 10, url: fmt.Sprintf("http://%s/stockhistory/", target),
 		headers: map[string]string{"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:10.0) Gecko/20100101 Firefox/10.0"}}
+	probe = Attack{name: "Probe", method: "GET", maxNap: 0, minNap: 0,
+		maxRequests: 15, minRequests: 10, url: fmt.Sprintf("http://%s/", target),
+		headers: map[string]string{"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:10.0) Gecko/20100101 Firefox/10.0"}}
 	cve20175638 = Attack{name: "cve20175638", method: "GET", maxNap: 0, minNap: 0, pause: 1,
 		maxRequests: 10, minRequests: 2, url: fmt.Sprintf("http://%s/", target),
 		headers: map[string]string{"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:10.0) Gecko/20100101 Firefox/10.0","Content-Type": "%{(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#_memberAccess?)multipart/form-data"}}
@@ -154,7 +158,7 @@ func (p *program) run() {
 	c = cron.New()
 
 	/* Every 1 minute */
-	//c.AddFunc("0 * * * *", func() { impostor.send() })
+	c.AddFunc("0 * * * *", func() { probe.send() })
 	
 	/* Every 5th minute */
 	c.AddFunc("0 */5 * * *", func() { ratelimit.send() })
@@ -285,7 +289,9 @@ func (attack *Attack) send() {
 	} else if attack.name == "RateLimit" {
 		Info.Println(fmt.Sprintf("Executing %s attack: method,url,body %s %s %s", attack.name, attack.method, attack.url, attack.body))
 		attack.crawler(req)
-
+	} else if attack.name == "Probe" {
+		Info.Println(fmt.Sprintf("Executing %s attack: method,url,body %s %s %s", attack.name, attack.method, attack.url, attack.body))
+		attack.probe(req)
 	} else {
 		/* Get random # of requests to send */
 		/* Send requests */
@@ -373,6 +379,32 @@ func (attack *Attack) crawler(request *http.Request) {
 	i := 1
 	//modBy := random(attack.minRequests, attack.maxRequests)
 	for _, element := range crawlerpaths {
+		//if i%modBy == 0 {
+			address.WriteString(attack.url)
+			address.WriteString(element)
+			parsedUrl, err := url.Parse(address.String())
+			request.URL = parsedUrl
+			resp, err := http.DefaultClient.Do(request)
+			//Info.Println(fmt.Sprintf("Executing %s attack: url: %s", attack.name, request.URL))
+			if err != nil {
+				//Error.Println(fmt.Sprintf("The following error occurred while executing %s:%s", attack.name, err.Error()))
+			}
+			if resp != nil {
+				resp.Body.Close()
+			}
+			address.Reset()
+		//}
+		i++
+		//time.Sleep(time.Duration(modBy) * time.Second)
+	}
+}
+
+func (attack *Attack) probe(request *http.Request) {
+	Info.Println(fmt.Sprintf("Add Probe Paths"))
+	var address bytes.Buffer
+	i := 1
+	//modBy := random(attack.minRequests, attack.maxRequests)
+	for _, element := range probeurls {
 		//if i%modBy == 0 {
 			address.WriteString(attack.url)
 			address.WriteString(element)
