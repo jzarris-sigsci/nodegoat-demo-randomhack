@@ -173,6 +173,9 @@ func (p *program) run() {
 	c.AddFunc("0 */25 * * * *", func() { auth.send() })
 	c.AddFunc("0 */25 * * * *", func() { cve20179805.send() })
 	
+	/* Every 28th minute */
+	c.AddFunc("0 */28 * * * *", func() { auth.send() })
+	
 	/* Every 30th minute */
 	// c.AddFunc("0 */30 * * * *", func() { bruteForce1.send() })
 
