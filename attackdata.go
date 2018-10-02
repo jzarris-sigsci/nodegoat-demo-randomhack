@@ -6,6 +6,7 @@ import (
 
 var (
   	target = os.Getenv("SIGSCI_TARGET")
+	environment= os.Getenv("SIGSCI_ENV")
 	probeurls = []string{"index.asp?page=..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd",
 		"shell.php",
 		"ampache/login.php",
