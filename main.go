@@ -333,7 +333,8 @@ func (attack *Attack) send() {
 			if resp != nil {
 				resp.Body.Close()
 			}
-			time.Sleep(time.Duration(attack.pause) * time.Second)
+			//time.Sleep(time.Duration(attack.pause) * time.Second)
+			time.Sleep(attack.pause)
 		}
 	}
 }
@@ -415,6 +416,7 @@ func (attack *Attack) crawler(request *http.Request) {
 				resp.Body.Close()
 			}
 			address.Reset()
+			time.Sleep(attack.pause)
 		//}
 		i++
 		//time.Sleep(time.Duration(modBy) * time.Second)
