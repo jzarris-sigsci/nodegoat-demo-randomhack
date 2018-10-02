@@ -334,7 +334,7 @@ func (attack *Attack) send() {
 				resp.Body.Close()
 			}
 			//time.Sleep(time.Duration(attack.pause) * time.Second)
-			time.Sleep(attack.pause)
+			time.Sleep(time.Duration(attack.pause))
 		}
 	}
 }
@@ -416,7 +416,7 @@ func (attack *Attack) crawler(request *http.Request) {
 				resp.Body.Close()
 			}
 			address.Reset()
-			time.Sleep(attack.pause)
+			time.Sleep(time.Duration(attack.pause))
 		//}
 		i++
 		//time.Sleep(time.Duration(modBy) * time.Second)
@@ -443,6 +443,7 @@ func (attack *Attack) probe(request *http.Request) {
 				resp.Body.Close()
 			}
 			address.Reset()
+			time.Sleep(time.Duration(attack.pause))
 		//}
 		i++
 		//time.Sleep(time.Duration(modBy) * time.Second)
