@@ -77,8 +77,7 @@ var (
 		"sample/xls2mysql/parser_path=http://cirt.net/rfiinc.txt",
 		"scripts/nessus%22%3E%3Cscript%3Ealert%28%27django_admin_xss.nasl%27%29%3C/script%3E/",
 		"?CFTOKEN=1%20UNION%20SELECT%201%2C2%2C3%2C4%2Cstorename%2C6%2C7%2C8%2C9%2C10%2C11%2C12%2C13%2C14%2C15%20from%20Params%22having%201%3D1",
-		"?password=1%20UNION%20SELECT%201%2C2%2C3%2C4%2Cstorename%2C6%2C7%2C8%2C9%2C10%2C11%2C12%2C13%2C14%2C15%20from%20Params%22having%201%3D1"
-		}
+		"?password=1%20UNION%20SELECT%201%2C2%2C3%2C4%2Cstorename%2C6%2C7%2C8%2C9%2C10%2C11%2C12%2C13%2C14%2C15%20from%20Params%22having%201%3D1"}
 		
 	crawlerpaths = []string{"10001.php",
 		"10002.php",
