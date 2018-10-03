@@ -106,8 +106,8 @@ func (p *program) Start(s service.Service) error {
 	auth = Attack{name: "Auth", method: "POST", maxNap: 240, minNap: 1, pause: 4, maxRequests: 100,
 		minRequests: 40, url: fmt.Sprintf("http://%s/login?%s", target, "userName=admin&password=taco"),
 		headers: map[string]string{"Content-Type": "application/x-www-form-urlencoded"}}
-	authSuc = Attack{name: "AuthSuc", method: "POST", maxNap: 240, minNap: 1, pause: 4, maxRequests: 40,
-		minRequests: 20, url: fmt.Sprintf("http://%s/login", target), body: strings.NewReader(`userName=user1&password=User1_123&csrf=`),
+	authSuc = Attack{name: "AuthSuc", method: "POST", maxNap: 240, minNap: 1, pause: 4, maxRequests: 20,
+		minRequests: 5, url: fmt.Sprintf("http://%s/login", target), body: strings.NewReader(`userName=user1&password=User1_123&csrf=`),
 		headers: map[string]string{"Content-Type": "application/x-www-form-urlencoded","User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36"}}
 	bruteForce1 = Attack{name: "Brute Force 1", method: "GET", maxNap: 0, minNap: 0, pause: 1,
 		maxRequests: 1800, minRequests: 2, url: fmt.Sprintf("http://%s/login", target)}
@@ -166,33 +166,27 @@ func (p *program) run() {
 
 	/* Every 1 minute */
 	//c.AddFunc("0 * * * *", func() { probe.send() })
-	c.AddFunc("0 */10 * * *", func() { impostor.send() })
-	if environment == "nodegoat" {
-		c.AddFunc("0 * * * * ", func() { authSuc.send() })
-	}
 	
 	/* Every 5th minute */
 	//c.AddFunc("0 */5 * * *", func() { ratelimit.send() })
 	
 	/* Every 10th minute */
 	//c.AddFunc("0 */10 * * *", func() { impostor.send() })
-	//if environment == "nodegoat" {
-	//	c.AddFunc("0 */10 * * * *", func() { authSuc.send() })
-	//}
+	if environment == "nodegoat" {
+		c.AddFunc("0 */10 * * * *", func() { authSuc.send() })
+	}
 	
 	/* Every 15th minute */
 	c.AddFunc("0 */15 * * *", func() { probe.send() })
 	c.AddFunc("0 */15 * * * *", func() { cve201711776.send() })
 	
 	/* Every 25th minute */
-	c.AddFunc("0 */25 * * * *", func() { auth.send() })
 	c.AddFunc("0 */25 * * * *", func() { cve20179805.send() })
 	
 	/* Every 27th minute */
 	c.AddFunc("0 0 */27 * * *", func() { xssBlast.send() })
 	
 	/* Every 28th minute */
-	c.AddFunc("0 */28 * * * *", func() { auth.send() })
 	
 	/* Every 30th minute */
 	// c.AddFunc("0 */30 * * * *", func() { bruteForce1.send() })
@@ -218,6 +212,7 @@ func (p *program) run() {
 	c.AddFunc("0 0 */1 * * *", func() { xssBlast.send() })
 	
 	/* Every 2nd hour */
+	c.AddFunc("0 0 */2 * * *", func() { auth.send() })
 	
 	/* Every 3rd Hour */
 	
