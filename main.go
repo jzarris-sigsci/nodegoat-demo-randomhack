@@ -172,7 +172,7 @@ func (p *program) run() {
 	
 	/* Every 10th minute */
 	//c.AddFunc("0 */10 * * *", func() { impostor.send() })
-	if environment = "nodegoat" {
+	if environment == "nodegoat" {
 		c.AddFunc("0 */10 * * * *", func() { authSuc.send() })
 	}
 	
