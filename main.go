@@ -134,7 +134,7 @@ func (p *program) Start(s service.Service) error {
 		maxRequests: 50, minRequests: 2, url: fmt.Sprintf("http://%s/stockhistory/", target),
 		headers: map[string]string{"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:10.0) Gecko/20100101 Firefox/10.0"}}
 	probe = Attack{name: "Probe", method: "GET", maxNap: 20, minNap: 1, pause: 2,
-		maxRequests: 25, minRequests: 15, url: fmt.Sprintf("http://%s/", target),
+		maxRequests: 125, minRequests: 40, url: fmt.Sprintf("http://%s/", target),
 		headers: map[string]string{"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:10.0) Gecko/20100101 Firefox/10.0"}}
 	cve20175638 = Attack{name: "cve20175638", method: "GET", maxNap: 10, minNap: 1, pause: 1,
 		maxRequests: 10, minRequests: 2, url: fmt.Sprintf("http://%s/", target),
@@ -172,7 +172,7 @@ func (p *program) run() {
 	
 	/* Every 10th minute */
 	//c.AddFunc("0 */10 * * *", func() { impostor.send() })
-	if environment == "nodegoat" {
+	if environment = "nodegoat" {
 		c.AddFunc("0 */10 * * * *", func() { authSuc.send() })
 	}
 	
@@ -439,7 +439,7 @@ func (attack *Attack) probe(request *http.Request) {
 	Info.Println(fmt.Sprintf("Add Probe Paths"))
 	var address bytes.Buffer
 	i := 1
-	//modBy := random(attack.minRequests, attack.maxRequests)
+	modBy := random(attack.minRequests, attack.maxRequests)
 	for _, element := range probeurls {
 		//if i%modBy == 0 {
 			address.WriteString(attack.url)
@@ -455,7 +455,7 @@ func (attack *Attack) probe(request *http.Request) {
 				resp.Body.Close()
 			}
 			address.Reset()
-			time.Sleep(time.Duration(attack.pause) * time.Second)
+			time.Sleep(time.Duration(modBy) * time.Second)
 		//}
 		i++
 		//time.Sleep(time.Duration(modBy) * time.Second)
