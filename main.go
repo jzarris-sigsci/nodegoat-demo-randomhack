@@ -213,7 +213,7 @@ func (p *program) run() {
 	c.AddFunc("0 0 */2 * * *", func() { auth.send() })
 	
 	/* Every 3rd Hour */
-	c.AddFunc("0 0 */3 * * *", func() { ratelimit.send() }
+	c.AddFunc("0 0 */3 * * *", func() { ratelimit.send() })
 	
 	/* Every 4th hour */
 	//c.AddFunc("0 0 */4 * * *", func() { bruteForce2.send() })
