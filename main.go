@@ -194,10 +194,8 @@ func (p *program) run() {
 	c.AddFunc("0 */30 * * * ", func() { cve20175638.send() })
 	
 	/* Every 45th minute */
-	c.AddFunc("0 */45 * * *", func() { impostor.send() })
 	
-	/* Every 50th minute */
-	c.AddFunc("0 */50 * * *", func() { ratelimit.send() })
+	/* Every 50th minute */)
 	c.AddFunc("0 */50 * * *", func() { xssBlast.send() })
 
 	/* At minute 50 */
@@ -215,9 +213,11 @@ func (p *program) run() {
 	c.AddFunc("0 0 */2 * * *", func() { auth.send() })
 	
 	/* Every 3rd Hour */
+	c.AddFunc("0 0 */3 * * *", func() { ratelimit.send() }
 	
 	/* Every 4th hour */
 	//c.AddFunc("0 0 */4 * * *", func() { bruteForce2.send() })
+	c.AddFunc("0 0 */4 * * *", func() { impostor.send() })
 	
 	/* At minute 18 past hour 1, 7, 13, and 19 */
 	c.AddFunc("0 18 1,7,13,19 * * *", func() {
