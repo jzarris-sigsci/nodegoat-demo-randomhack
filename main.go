@@ -335,7 +335,9 @@ func (attack *Attack) send() {
 			if ret == 1 {
 				ua = "() { :; }; echo Nikto-Added-CVE-2014-6271: true;echo;echo;"
 			}
-			req.Header.Set("User-Agent", ua)
+			if attack.name != "AuthSuc" && attack.name != "Auth" {
+				req.Header.Set("User-Agent", ua)
+			}
 			resp, err := http.DefaultClient.Do(req)
 			if err != nil {
 				Error.Println(fmt.Sprintf("The following error occurred while executing %s:%s", attack.name, err.Error()))
