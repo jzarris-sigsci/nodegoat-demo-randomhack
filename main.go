@@ -107,7 +107,7 @@ func (p *program) Start(s service.Service) error {
 		minRequests: 40, url: fmt.Sprintf("http://%s/login?%s", target, "userName=admin&password=taco"),
 		headers: map[string]string{"Content-Type": "application/x-www-form-urlencoded"}}
 	authSuc = Attack{name: "AuthSuc", method: "POST", maxNap: 240, minNap: 1, pause: 4, maxRequests: 40,
-		minRequests: 20, url: fmt.Sprintf("http://%s/login", target), body: strings.NewReader(`userName=user1&password=User1_123`)
+		minRequests: 20, url: fmt.Sprintf("http://%s/login", target), body: strings.NewReader(`userName=user1&password=User1_123`),
 		headers: map[string]string{"Content-Type": "application/x-www-form-urlencoded"}}
 	bruteForce1 = Attack{name: "Brute Force 1", method: "GET", maxNap: 0, minNap: 0, pause: 1,
 		maxRequests: 1800, minRequests: 2, url: fmt.Sprintf("http://%s/login", target)}
