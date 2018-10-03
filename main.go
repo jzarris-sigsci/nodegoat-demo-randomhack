@@ -178,10 +178,8 @@ func (p *program) run() {
 	
 	/* Every 15th minute */
 	c.AddFunc("0 */15 * * *", func() { probe.send() })
-	c.AddFunc("0 */15 * * * *", func() { cve201711776.send() })
 	
 	/* Every 25th minute */
-	c.AddFunc("0 */25 * * * *", func() { cve20179805.send() })
 	
 	/* Every 27th minute */
 	c.AddFunc("0 0 */27 * * *", func() { xssBlast.send() })
@@ -191,7 +189,6 @@ func (p *program) run() {
 	/* Every 30th minute */
 	// c.AddFunc("0 */30 * * * *", func() { bruteForce1.send() })
 	c.AddFunc("0 */30 * * * ", func() { sqlBlast.send() })
-	c.AddFunc("0 */30 * * * ", func() { cve20175638.send() })
 	
 	/* Every 45th minute */
 	
@@ -208,9 +205,11 @@ func (p *program) run() {
 	
 	/* Top of every hour */
 	c.AddFunc("0 0 */1 * * *", func() { xssBlast.send() })
+	c.AddFunc("0 0 */1 * * ", func() { cve20179805.send() })
 	
 	/* Every 2nd hour */
 	c.AddFunc("0 0 */2 * * *", func() { auth.send() })
+	c.AddFunc("0 0 */2 * * *", func() { cve201711776.send() })
 	
 	/* Every 3rd Hour */
 	c.AddFunc("0 0 */3 * * *", func() { ratelimit.send() })
