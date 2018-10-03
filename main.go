@@ -195,7 +195,7 @@ func (p *program) run() {
 	
 	/* Every 45th minute */
 	
-	/* Every 50th minute */)
+	/* Every 50th minute */
 	c.AddFunc("0 */50 * * *", func() { xssBlast.send() })
 
 	/* At minute 50 */
